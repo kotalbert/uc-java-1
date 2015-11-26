@@ -36,14 +36,14 @@ public class HelloWorld extends PApplet
 	UnfoldingMap map2;
 
 	public void setup() {
-		size(1000, 600, P2D);  // Set up the Applet window to be 800x600
+		size(800, 600, P2D);  // Set up the Applet window to be 800x600
 		                      // The OPENGL argument indicates to use the 
 		                      // Processing library's 2D drawing
 		                      // You'll learn more about processing in Module 3
 
 		// This sets the background color for the Applet.  
 		// Play around with these numbers and see what happens!
-		this.background(100, 100, 100);
+		this.background(200, 200, 200);
 		
 		// Select a map provider
 		AbstractMapProvider provider = new Google.GoogleTerrainProvider();
@@ -65,7 +65,7 @@ public class HelloWorld extends PApplet
 		// The 6th argument specifies the map provider.  
 		// There are several providers built-in.
 		// Note if you are working offline you must use the MBTilesMapProvider
-		map1 = new UnfoldingMap(this, 50, 50, 350, 500, provider);
+		map1 = new UnfoldingMap(this, 50, 50, 200, 300, provider);
 
 		// The next line zooms in and centers the map at 
 	    // 32.9 (latitude) and -117.2 (longitude)
@@ -75,11 +75,12 @@ public class HelloWorld extends PApplet
 		MapUtils.createDefaultEventDispatcher(this, map1);
 		
 		
-		map2 = new UnfoldingMap(this, 450, 50, 350, 500, provider);
+		map2 = new UnfoldingMap(this, 300, 50, 200, 300, provider);
 		
 		// 52.237846, 20.934247
-		map2.zoomAndPanTo(zoomLevel, new Location (52.23f, 20.93f));
-		
+		// map2.zoomAndPanTo(zoomLevel, new Location (52.23f, 20.93f));
+		// rio
+		map2.zoomAndPanTo(zoomLevel, new Location (-22.9f, -43.2f));
 		MapUtils.createDefaultEventDispatcher(this, map2);
 		
 	}
