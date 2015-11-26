@@ -27,7 +27,7 @@ public class HelloWorld extends PApplet
 	public static String mbTilesString = "blankLight-1-3.mbtiles";
 	
 	// IF YOU ARE WORKING OFFLINE: Change the value of this variable to true
-	private static final boolean offline = true;
+	private static final boolean offline = false;
 	
 	/** The map we use to display our home town: La Jolla, CA */
 	UnfoldingMap map1;
@@ -77,10 +77,10 @@ public class HelloWorld extends PApplet
 		
 		map2 = new UnfoldingMap(this, 300, 50, 200, 300, provider);
 		
-		// 52.237846, 20.934247
-		// map2.zoomAndPanTo(zoomLevel, new Location (52.23f, 20.93f));
-		// rio
-		map2.zoomAndPanTo(zoomLevel, new Location (-22.9f, -43.2f));
+		// Warsaw: 52.237846 E, 20.934247 N
+		map2.zoomAndPanTo(zoomLevel, new Location (52.23f, 20.93f));
+		// Rio
+		// map2.zoomAndPanTo(zoomLevel, new Location (-22.9f, -43.2f));
 		MapUtils.createDefaultEventDispatcher(this, map2);
 		
 	}
