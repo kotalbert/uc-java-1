@@ -11,7 +11,7 @@ import de.fhpotsdam.unfolding.utils.MapUtils;
 /** HelloWorld
   * An application with two maps side-by-side zoomed in on different locations.
   * Author: UC San Diego Coursera Intermediate Programming team
-  * @author Your name here
+  * @author Pawel Daniluk
   * Date: July 17, 2015
   * */
 public class HelloWorld extends PApplet
@@ -27,7 +27,7 @@ public class HelloWorld extends PApplet
 	public static String mbTilesString = "blankLight-1-3.mbtiles";
 	
 	// IF YOU ARE WORKING OFFLINE: Change the value of this variable to true
-	private static final boolean offline = false;
+	private static final boolean offline = true;
 	
 	/** The map we use to display our home town: La Jolla, CA */
 	UnfoldingMap map1;
