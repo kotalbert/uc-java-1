@@ -1,3 +1,4 @@
+package drawing;
 import processing.core.PApplet;
 import de.fhpotsdam.unfolding.UnfoldingMap;
 import de.fhpotsdam.unfolding.geo.Location;
@@ -11,6 +12,10 @@ import de.fhpotsdam.unfolding.utils.MapUtils;
  */
 public class HelloUCSDWorld extends PApplet {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4914690535377329276L;
 	UnfoldingMap map;
 
 	public void setup() {
