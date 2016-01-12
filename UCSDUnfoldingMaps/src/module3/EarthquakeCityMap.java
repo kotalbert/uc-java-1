@@ -13,6 +13,7 @@ import processing.core.PApplet;
 import de.fhpotsdam.unfolding.UnfoldingMap;
 import de.fhpotsdam.unfolding.marker.Marker;
 import de.fhpotsdam.unfolding.data.PointFeature;
+import de.fhpotsdam.unfolding.geo.Location;
 import de.fhpotsdam.unfolding.marker.SimplePointMarker;
 import de.fhpotsdam.unfolding.providers.Google;
 import de.fhpotsdam.unfolding.providers.MBTilesMapProvider;
@@ -24,8 +25,9 @@ import parsing.ParseFeed;
 /** EarthquakeCityMap
  * An application with an interactive map displaying earthquake data.
  * Author: UC San Diego Intermediate Software Development MOOC team
- * @author Your name here
- * Date: July 17, 2015
+ * @author Pawel Daniluk
+ * @version 1.0
+ * Date: 2016-01-12
  * */
 public class EarthquakeCityMap extends PApplet {
 
@@ -49,6 +51,10 @@ public class EarthquakeCityMap extends PApplet {
 	//feed with magnitude 2.5+ Earthquakes
 	private String earthquakesURL = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.atom";
 
+	//Colors to be used on the map
+	private final int BLUE = color(0, 102, 255);
+	private final int RED = color(204, 0, 0);
+	private final int YELLOW = color(255, 255, 0);
 	
 	public void setup() {
 		size(950, 600, OPENGL);
@@ -73,21 +79,16 @@ public class EarthquakeCityMap extends PApplet {
 	    //PointFeatures have a getLocation method
 	    List<PointFeature> earthquakes = ParseFeed.parseEarthquake(this, earthquakesURL);
 	    
-	    // These print statements show you (1) all of the relevant properties 
-	    // in the features, and (2) how to get one property and use it
-	    if (earthquakes.size() > 0) {
-	    	PointFeature f = earthquakes.get(0);
-	    	System.out.println(f.getProperties());
-	    	Object magObj = f.getProperty("magnitude");
-	    	float mag = Float.parseFloat(magObj.toString());
-	    	// PointFeatures also have a getLocation method
+
+	    // populate marker list from feature list
+	    for (PointFeature point : earthquakes) {
+
+	    	markers.add(createMarker(point));
 	    }
 	    
-	    // Here is an example of how to use Processing's color method to generate 
-	    // an int that represents the color yellow.  
-	    int yellow = color(255, 255, 0);
+	    map.addMarkers(markers);
 	    
-	    //TODO: Add code here as appropriate
+
 	}
 		
 	// A suggested helper method that takes in an earthquake feature and 
@@ -95,8 +96,27 @@ public class EarthquakeCityMap extends PApplet {
 	// TODO: Implement this method and call it from setUp, if it helps
 	private SimplePointMarker createMarker(PointFeature feature)
 	{
-		// finish implementing and use this method, if it helps.
-		return new SimplePointMarker(feature.getLocation());
+		SimplePointMarker marker = new SimplePointMarker(feature.getLocation());
+		float mag = Float.parseFloat(feature.getProperties().get("magnitude").toString());
+		
+
+		
+		// depending on magnitude, format marker.
+		if (mag < 4.0f){
+			marker.setColor(BLUE);
+			marker.setRadius(6);
+		}
+		
+		else if (mag < 4.9f) {
+			marker.setColor(YELLOW);
+			marker.setRadius(8);
+		}
+		else {
+			marker.setColor(RED);
+			marker.setRadius(10);
+		}
+		
+		return marker;
 	}
 	
 	public void draw() {
@@ -106,11 +126,12 @@ public class EarthquakeCityMap extends PApplet {
 	}
 
 
-	// helper method to draw key in GUI
-	// TODO: Implement this method to draw the key
+	// draw box explaining the markers on the map
 	private void addKey() 
 	{	
-		// Remember you can use Processing's graphics methods here
-	
+		textSize(16);
+		text("Earthquake key", 30, 80);
+		fill(0, 102, 153);
+		rect(20,50,150,350);
 	}
 }
