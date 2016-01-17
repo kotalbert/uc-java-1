@@ -77,6 +77,18 @@ public abstract class EarthquakeMarker extends SimplePointMarker
 	// You might find the getters below helpful.
 	private void colorDetermine(PGraphics pg) {
 		//TODO: Implement this method
+		
+		
+		float depth = getDepth();
+		int col = 0;
+		
+		if (depth < 70) col = pg.color(255, 204, 0);
+		else if (depth < 300) col = pg.color(0, 0, 255);
+		else col = pg.color(255,0,0);
+		
+		pg.fill(col);
+		
+		
 	}
 	
 	
